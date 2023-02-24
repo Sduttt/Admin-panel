@@ -1,0 +1,24 @@
+.home{
+    display: flex;
+
+    .homecontainer{
+        flex: 6;
+        .widgets{
+            display: flex;
+            padding: 20px;
+            gap: 50px;
+        }
+        .charts{
+            display: flex;
+            padding: 10px 20px;
+            gap: 50px;
+        }
+        .listContainer{
+            -webkit-box-shadow: 4px -2px 22px -6px rgba(0, 0, 0, 0.48);
+            -moz-box-shadow: 4px -2px 22px -6px rgba(0, 0, 0, 0.48);
+            box-shadow: 4px -2px 22px -6px rgba(0, 0, 0, 0.48);
+            padding: 20px;
+            margin: 20px;
+        }
+    }
+}
