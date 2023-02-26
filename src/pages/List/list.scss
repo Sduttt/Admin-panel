@@ -1,0 +1,26 @@
+.list {
+  display: flex;
+  width: 100%;
+
+  .listContainer {
+    flex: 6;
+
+    .adduserLink {
+      display: flex;
+      text-decoration: none;
+      justify-content: center;
+
+      .adduser {
+        cursor: pointer;
+        width: 100px;
+        padding: 10px;
+        border-radius: 6px;
+        background-color: #7451f8;
+        border: none;
+        color: white;
+        font-weight: 700;
+        margin: 5px;
+      }
+    }
+  }
+}

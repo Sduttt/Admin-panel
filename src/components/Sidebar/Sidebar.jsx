@@ -1,5 +1,6 @@
 import React from "react";
 import "./sidebar.scss";
+import { Link } from "react-router-dom";
 
 //icons
 import DashboardIcon from "@mui/icons-material/Dashboard";
@@ -9,31 +10,36 @@ import DeliveryDiningIcon from "@mui/icons-material/DeliveryDining";
 import QueryStatsRoundedIcon from "@mui/icons-material/QueryStatsRounded";
 import NotificationImportantRoundedIcon from "@mui/icons-material/NotificationImportantRounded";
 import PrecisionManufacturingRoundedIcon from "@mui/icons-material/PrecisionManufacturingRounded";
-import SettingsRoundedIcon from '@mui/icons-material/SettingsRounded';
-import AccountCircleRoundedIcon from '@mui/icons-material/AccountCircleRounded';
-import LogoutIcon from '@mui/icons-material/Logout';
-
+import SettingsRoundedIcon from "@mui/icons-material/SettingsRounded";
+import AccountCircleRoundedIcon from "@mui/icons-material/AccountCircleRounded";
+import LogoutIcon from "@mui/icons-material/Logout";
 
 const Sidebar = () => {
   return (
     <div className="sidebar">
       <div className="top">
-        <span className="logo">Dutta & Co.</span>
+        <Link to="/" style={{textDecoration: "none"}}>
+          <span className="logo">Dutta & Co.</span>
+        </Link>
       </div>
       <hr />
 
       <div className="center">
         <ul>
           <p>MAIN</p>
-          <li>
-            <DashboardIcon className="icon" />
-            <span>Dashboard</span>
-          </li>
+          <Link to="/" style={{ textDecoration: "none" }}>
+            <li>
+              <DashboardIcon className="icon" />
+              <span>Dashboard</span>
+            </li>
+          </Link>
           <p>Lists</p>
-          <li>
-            <PersonOutlineOutlinedIcon className="icon" />
-            <span>Users</span>
-          </li>
+          <Link to="/users" style={{ textDecoration: "none" }}>
+            <li>
+              <PersonOutlineOutlinedIcon className="icon" />
+              <span>Users</span>
+            </li>
+          </Link>
           <li>
             <CategoryIcon className="icon" />
             <span>Products</span>
@@ -59,10 +65,12 @@ const Sidebar = () => {
             <SettingsRoundedIcon className="icon" />
             <span>Settings</span>
           </li>
-          <li>
-            <AccountCircleRoundedIcon className="icon" />
-            <span>Profile</span>
-          </li>
+          <Link to="/profile" style={{ textDecoration: "none" }}>
+            <li>
+              <AccountCircleRoundedIcon className="icon" />
+              <span>Profile</span>
+            </li>
+          </Link>
           <li>
             <LogoutIcon className="icon" />
             <span>Logout</span>
