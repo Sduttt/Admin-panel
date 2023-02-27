@@ -8,6 +8,7 @@
     -webkit-box-shadow: 4px -2px 22px -6px rgba(0,0,0,0.48);
     -moz-box-shadow: 4px -2px 22px -6px rgba(0,0,0,0.48);
     box-shadow: 4px -2px 22px -6px rgba(0,0,0,0.48);
+
     
     .left{
         display: flex;
@@ -57,5 +58,31 @@
             border-radius: 5px;
             align-self: flex-end;
         }
+    }
+}
+
+
+.widget.users{
+    .icon{
+        color: chocolate;
+        background-color: #fde2cf;
+    }
+}
+.widget.orders{
+    .icon{
+        color: mediumvioletred;
+        background-color: #ffdef3;
+    }
+}
+.widget.earning{
+    .icon{
+        color: darkgreen;
+        background-color: #ccfccc;
+    }
+}
+.widget.balance{
+    .icon{
+        color: crimson;
+        background-color: #fdd3dc;
     }
 }

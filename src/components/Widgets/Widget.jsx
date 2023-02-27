@@ -50,7 +50,7 @@ const percentage = 20;
       break;
   }
   return (
-    <div className="widget">
+    <div className={`widget ${data.title}`}>
       <div className="left">
         <span className="title">{data.title}</span>
         <span className="counter"> {data.isMoney && '$'} {amount} </span>
