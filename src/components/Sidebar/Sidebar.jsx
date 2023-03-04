@@ -1,4 +1,4 @@
-import React, {useContext} from "react";
+import React, { useContext } from "react";
 import "./sidebar.scss";
 import { Link } from "react-router-dom";
 import { darkModeContext } from "../../context/darkModeContext";
@@ -14,14 +14,15 @@ import PrecisionManufacturingRoundedIcon from "@mui/icons-material/PrecisionManu
 import SettingsRoundedIcon from "@mui/icons-material/SettingsRounded";
 import AccountCircleRoundedIcon from "@mui/icons-material/AccountCircleRounded";
 import LogoutIcon from "@mui/icons-material/Logout";
+import LoginIcon from "@mui/icons-material/Login";
 
 const Sidebar = () => {
-  const {dispatch} = useContext(darkModeContext);
+  const { dispatch } = useContext(darkModeContext);
 
   return (
     <div className="sidebar">
       <div className="top">
-        <Link to="/" style={{textDecoration: "none"}}>
+        <Link to="/" style={{ textDecoration: "none" }}>
           <span className="logo">Dutta & Co.</span>
         </Link>
       </div>
@@ -74,6 +75,12 @@ const Sidebar = () => {
               <span>Profile</span>
             </li>
           </Link>
+          <Link to="/login" style={{ textDecoration: "none" }}>
+            <li>
+              <LoginIcon className="icon" />
+              <span>Login</span>
+            </li>
+          </Link>
           <li>
             <LogoutIcon className="icon" />
             <span>Logout</span>
@@ -81,12 +88,16 @@ const Sidebar = () => {
         </ul>
       </div>
       <div className="bottom">
-        <div className="coloroption"onClick={() => {
-          dispatch({type: "LIGHT"})
-        }}></div>
-        <div className="coloroption"onClick={() => {
-          dispatch({type: "DARK"})
-        }}></div>
+        <div
+          className="coloroption"
+          onClick={() => {
+            dispatch({ type: "LIGHT" });
+          }}></div>
+        <div
+          className="coloroption"
+          onClick={() => {
+            dispatch({ type: "DARK" });
+          }}></div>
       </div>
     </div>
   );
