@@ -39,6 +39,10 @@
         gap: 15px;
         align-items: center;
 
+        &:active{
+            outline: none;
+        }
+
         .viewButton{
             color: darkblue;
             border: 1px dotted #0404adbe;

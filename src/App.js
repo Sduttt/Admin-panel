@@ -3,6 +3,7 @@ import React, { useContext } from "react";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { AuthContext } from "./context/AuthContext";
 import { darkModeContext } from "./context/darkModeContext";
+import { userInputs } from "./datasource";
 
 import Home from "./pages/Home/Home";
 import List from "./pages/List/List";
@@ -49,7 +50,7 @@ function App() {
               path="add"
               element={
                 <RequireAuth>
-                  <New />
+                  <New inputs={userInputs} />
                 </RequireAuth>
               }
             />

@@ -3,7 +3,7 @@ export const userColumns = [
     {
       field: "user",
       headerName: "User",
-      width: 230,
+      width: 180,
       renderCell: (params) => {
         return (
           <div className="cellWithImg">
@@ -18,83 +18,73 @@ export const userColumns = [
       headerName: "Email",
       width: 230,
     },
-  
     {
-      field: "age",
-      headerName: "Age",
+      field: "displayName",
+      headerName: "Full Name",
+      width: 150,
+    },
+    {
+      field: "country",
+      headerName: "Country",
       width: 100,
     },
-    {
-      field: "status",
-      headerName: "Status",
-      width: 160,
-      renderCell: (params) => {
-        return (
-          <div className={`cellWithStatus ${params.row.status}`}>
-            {params.row.status}
-          </div>
-        );
-      },
-    },
+    // {
+    //   field: "status",
+    //   headerName: "Status",
+    //   width: 160,
+    //   renderCell: (params) => {
+    //     return (
+    //       <div className={`cellWithStatus ${params.row.status}`}>
+    //         {params.row.status}
+    //       </div>
+    //     );
+    //   },
+    // },
   ];
   
   //temporary data
-  export const userRows = [
+  
+  export const userInputs = [
     {
       id: "username",
-      username: "Snow",
-      img: "https://images.pexels.com/photos/1820770/pexels-photo-1820770.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500",
-      status: "active",
-      email: "1snow@gmail.com",
-      age: 35,
+      label: "Username",
+      type: "text",
+      placeholder: "john_doe",
     },
     {
-      id: "displayname",
-      username: "Jamie Lannister",
-      img: "https://images.pexels.com/photos/1820770/pexels-photo-1820770.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500",
-      email: "2snow@gmail.com",
-      status: "passive",
-      age: 42,
-    },
-    {
-      id: "phone",
-      username: "Lannister",
-      img: "https://images.pexels.com/photos/1820770/pexels-photo-1820770.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500",
-      email: "3snow@gmail.com",
-      status: "pending",
-      age: 45,
+      id: "displayName",
+      label: "Name and surname",
+      type: "text",
+      placeholder: "John Doe",
     },
     {
       id: "email",
-      username: "Stark",
-      img: "https://images.pexels.com/photos/1820770/pexels-photo-1820770.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500",
-      email: "4snow@gmail.com",
-      status: "active",
-      age: 16,
+      label: "Email",
+      type: "mail",
+      placeholder: "john_doe@gmail.com",
+    },
+    {
+      id: "phone",
+      label: "Phone",
+      type: "text",
+      placeholder: "+1 234 567 89",
     },
     {
       id: "password",
-      username: "Targaryen",
-      img: "https://images.pexels.com/photos/1820770/pexels-photo-1820770.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500",
-      email: "5snow@gmail.com",
-      status: "passive",
-      age: 22,
+      label: "Password",
+      type: "password",
     },
     {
       id: "address",
-      username: "Melisandre",
-      img: "https://images.pexels.com/photos/1820770/pexels-photo-1820770.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500",
-      email: "6snow@gmail.com",
-      status: "active",
-      age: 15,
+      label: "Address",
+      type: "text",
+      placeholder: "Elton St. 216 NewYork",
     },
     {
       id: "country",
-      username: "Clifford",
-      img: "https://images.pexels.com/photos/1820770/pexels-photo-1820770.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500",
-      email: "7snow@gmail.com",
-      status: "passive",
-      age: 44,
+      label: "Country",
+      type: "text",
+      placeholder: "USA",
     },
-
   ];
+  

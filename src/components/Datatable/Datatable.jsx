@@ -1,14 +1,46 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./datatable.scss";
 import { DataGrid } from "@mui/x-data-grid";
-import { userColumns, userRows } from "../../datasource";
+import {
+  collection,
+  doc,
+  deleteDoc,
+  onSnapshot,
+} from "firebase/firestore";
+import { db } from "../../firebase";
+import { userColumns } from "../../datasource";
 
 const Datatable = () => {
-  const [data, setData] = useState(userRows)
+  const [data, setData] = useState([]);
 
-  const handleDlt = (id) => {
-    setData(data.filter(item => item.id !== id))
-  }
+  useEffect(() => {
+    const unsub = onSnapshot(
+      collection(db, "users"),
+      (snapshot) => {
+        let list = [];
+        snapshot.docs.forEach((doc) => {
+          list.push({ id: doc.id, ...doc.data() });
+        });
+        setData(list);
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+
+    return () => {
+      unsub();
+    };
+  }, []);
+
+  const handleDlt = async (id) => {
+    try {
+      await deleteDoc(doc(db, "users", id));
+      setData(data.filter((item) => item.id !== id));
+    } catch (error) {
+      console.log(error);
+    }
+  };
   const actionColumn = [
     {
       field: "action",
@@ -18,7 +50,11 @@ const Datatable = () => {
         return (
           <div className="cellAction">
             <div className="viewButton">View</div>
-            <div className="deleteButton" onClick={() => handleDlt(params.row.id)} >Delete</div>
+            <div
+              className="deleteButton"
+              onClick={() => handleDlt(params.row.id)}>
+              Delete
+            </div>
           </div>
         );
       },

@@ -1,7 +1,10 @@
 import React, { useContext } from "react";
 import "./sidebar.scss";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { darkModeContext } from "../../context/darkModeContext";
+import { AuthContext } from "../../context/AuthContext";
+import { signOut } from "firebase/auth";
+import { auth } from "../../firebase";
 
 //icons
 import DashboardIcon from "@mui/icons-material/Dashboard";
@@ -18,6 +21,18 @@ import LoginIcon from "@mui/icons-material/Login";
 
 const Sidebar = () => {
   const { dispatch } = useContext(darkModeContext);
+  const { dispatch: dispatchAuth }  = useContext(AuthContext);
+  const navigate = useNavigate()
+
+  const handleSignout = () => {
+    signOut(auth).then(() => {
+      dispatchAuth({type: "LOGOUT"});
+      navigate('/login');
+      console.log("Signed out");
+    }).catch((error) => {
+      console.log(error);
+    });
+  }
 
   return (
     <div className="sidebar">
@@ -81,7 +96,7 @@ const Sidebar = () => {
               <span>Login</span>
             </li>
           </Link>
-          <li>
+          <li onClick={handleSignout}>
             <LogoutIcon className="icon" />
             <span>Logout</span>
           </li>

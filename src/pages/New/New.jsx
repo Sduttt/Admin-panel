@@ -1,30 +1,86 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./new.scss";
 import Sidebar from "../../components/Sidebar/Sidebar";
 import Navbar from "../../components/Navbar/Navbar";
 import AddAPhotoIcon from "@mui/icons-material/AddAPhoto";
-import { doc, setDoc } from "firebase/firestore";
-import { db } from '../../firebase';
+import { doc, serverTimestamp, setDoc } from "firebase/firestore";
+import { db, auth, storage } from "../../firebase";
+import { createUserWithEmailAndPassword } from "firebase/auth";
+import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
+import { useNavigate } from "react-router-dom";
 
-const New = () => {
+const New = ({ inputs }) => {
   const [file, setFile] = useState("");
-  const [data, setData] = useState({})
+  const [data, setData] = useState({});
+  const [perc, setPerc] = useState(null);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const uploadFile = () => {
+      const name = new Date().getTime() + file.name;
+      const storageRef = ref(storage, file.name);
+      const uploadTask = uploadBytesResumable(storageRef, file);
+
+      uploadTask.on(
+        "state_changed",
+        (snapshot) => {
+          const progress =
+            (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+          console.log("Upload is " + progress + "% done");
+          setPerc(progress);
+
+          switch (snapshot.state) {
+            case "paused":
+              console.log("Upload is paused");
+              break;
+            case "running":
+              console.log("Upload is running");
+              break;
+            default:
+              break;
+          }
+        },
+        (error) => {
+            console.log(error)
+        },
+        () => {
+          getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+            setData(prev => ({...prev, img: downloadURL}))
+          });
+        }
+      );
+    };
+
+    file && uploadFile();
+  }, [file]);
+  const handleInput = (e) => {
+    const id = e.target.id;
+    const value = e.target.value;
+
+    setData({ ...data, [id]: value });
+  };
 
   const handleAdd = async (e) => {
     e.preventDefault();
 
-    try{
-      await setDoc(doc(db, "cities", "LA"), {
-        name: "Los Angeles",
-        state: "CA",
-        country: "USA",
+    try {
+      const res = await createUserWithEmailAndPassword(
+        auth,
+        data.email,
+        data.password
+      );
+      await setDoc(doc(db, "users", res.user.uid), {
+        ...data,
+        timestamp: serverTimestamp(),
       });
-    } catch(error){
-      console.log(error)
+    } catch (error) {
+      console.log(error);
     }
 
+    setData({});
+    setFile(null)
+    navigate(-1)
   };
-
 
   return (
     <div className="new">
@@ -60,35 +116,21 @@ const New = () => {
                   accept=".jpg, .jpeg, .png"
                 />
               </div>
-              <div className="forminput">
-                <label htmlFor="">Username:</label>
-                <input type="text" placeholder="jhon_doe" />
-              </div>
-              <div className="forminput">
-                <label htmlFor="">Full Name:</label>
-                <input type="text" placeholder="Jhon Doe" />
-              </div>
-              <div className="forminput">
-                <label htmlFor="">Email:</label>
-                <input type="text" placeholder="jhon_doe@dutta.com" />
-              </div>
-              <div className="forminput">
-                <label htmlFor="">Phone number:</label>
-                <input type="text" placeholder="+01 234 56789" />
-              </div>
-              <div className="forminput">
-                <label htmlFor="">Password:</label>
-                <input type="password" />
-              </div>
-              <div className="forminput">
-                <label htmlFor="">Address:</label>
-                <input type="text" placeholder="Arkham Asylum, Gotham" />
-              </div>
-              <div className="forminput">
-                <label htmlFor="">Country:</label>
-                <input type="text" placeholder="VSA" />
-              </div>
-              <button className="" type="submit">
+
+              {inputs.map((input) => (
+                <div className="forminput" key={input.id}>
+                  <label htmlFor=""> {input.label} </label>
+                  <input
+                    required
+                    type={input.type}
+                    placeholder={input.placeholder}
+                    id={input.id}
+                    onChange={handleInput}
+                  />
+                </div>
+              ))}
+
+              <button disabled={perc !== null && perc < 100} className="" type="submit">
                 Submit
               </button>
             </form>
