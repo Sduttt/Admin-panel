@@ -27,7 +27,6 @@ const Login = () => {
       })
       .catch((error) => {
         setError(true);
-        var errorCode = error.code;
         var errorMessage = error.message;
         console.log(errorMessage);
         // ..
