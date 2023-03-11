@@ -4,7 +4,7 @@ import Sidebar from "../../components/Sidebar/Sidebar";
 import Navbar from "../../components/Navbar/Navbar";
 import Datatable from "../../components/Datatable/Datatable";
 import { Link } from "react-router-dom";
-// import New from "../New/New";
+
 
 const List = () => {
   return (

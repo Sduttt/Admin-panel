@@ -1,30 +1,12 @@
-import React, { useContext, useEffect, useState } from "react";
+import React from "react";
 import "./single.scss";
 import Sidebar from "../../components/Sidebar/Sidebar";
 import Navbar from "../../components/Navbar/Navbar";
-import Chart from '../../components/Chart/Chart';
-import MyTable from '../../components/Table/Table'
-import { AuthContext } from "../../context/AuthContext";
-import { collection, getDocs } from "firebase/firestore";
-import { db } from "../../firebase";
+import Chart from "../../components/Chart/Chart";
+import MyTable from "../../components/Table/Table";
+import { Link } from "react-router-dom";
 
-const Single = () => {
-
-  const { currentUser } = useContext(AuthContext);
-  const myUid = currentUser.uid;
-  const [userData, setUserData] = useState(null)
-  useEffect(() => {
-    async function fetchData() {
-      const querySnapshot = await getDocs(collection(db, "users"));
-      querySnapshot.forEach((doc) => {
-        if (doc.id === myUid) {
-          setUserData(doc.data())
-        }
-      });
-    }
-    fetchData();
-  }, [myUid]);
-
+const Single = ({ img, name, email, phone, address, country }) => {
   return (
     <div className="singlepage">
       <Sidebar />
@@ -32,39 +14,41 @@ const Single = () => {
         <Navbar />
         <div className="top">
           <div className="left">
-            <div className="editbutton">Edit</div>
+            <Link to="*">
+              <div className="editbutton">Edit</div>
+            </Link>
             <h1 className="title">Information</h1>
             <div className="item">
-                <img src= {userData !== null ? userData.img : ""} alt="ProfilePhoto" className="itemimg" />
-                <div className="details">
-                    <h1 className="detailhead"> {userData !== null ? userData.displayName : "Loading..."} </h1>
-                    <div className="detailitem">
-                        <div className="itemkey">Email:</div>
-                        <div className="itemvalue"> {userData !== null ? userData.email : "Loading..."} </div>
-                    </div>
-                    <div className="detailitem">
-                        <div className="itemkey">Phone:</div>
-                        <div className="itemvalue"> {userData !== null ? userData.phone : "Loading..."} </div>
-                    </div>
-                    <div className="detailitem">
-                        <div className="itemkey">Address:</div>
-                        <div className="itemvalue"> {userData !== null ? userData.address : "Loading..."} </div>
-                    </div>
-                    <div className="detailitem">
-                        <div className="itemkey">Country:</div>
-                        <div className="itemvalue"> {userData !== null ? userData.country : "Loading..."} </div>
-                    </div>
+              <img src={img} alt="ProfilePhoto" className="itemimg" />
+              <div className="details">
+                <h1 className="detailhead"> {name} </h1>
+                <div className="detailitem">
+                  <div className="itemkey">Email:</div>
+                  <div className="itemvalue"> {email} </div>
                 </div>
+                <div className="detailitem">
+                  <div className="itemkey">Phone:</div>
+                  <div className="itemvalue"> {phone} </div>
+                </div>
+                <div className="detailitem">
+                  <div className="itemkey">Address:</div>
+                  <div className="itemvalue"> {address} </div>
+                </div>
+                <div className="detailitem">
+                  <div className="itemkey">Country:</div>
+                  <div className="itemvalue"> {country} </div>
+                </div>
+              </div>
             </div>
           </div>
           <div className="right">
-            <Chart aspect={7/2} title={"User Spending(Last 6 months):"} />
+            <Chart aspect={7 / 2} title={"User Spending(Last 6 months):"} />
           </div>
         </div>
 
         <div className="bottom">
-            <h1 className="title">Last Transactions</h1>
-            <MyTable />
+          <h1 className="title">Last Transactions</h1>
+          <MyTable />
         </div>
       </div>
     </div>
