@@ -21,18 +21,20 @@ import LoginIcon from "@mui/icons-material/Login";
 
 const Sidebar = () => {
   const { dispatch } = useContext(darkModeContext);
-  const { dispatch: dispatchAuth }  = useContext(AuthContext);
-  const navigate = useNavigate()
+  const { dispatch: dispatchAuth } = useContext(AuthContext);
+  const navigate = useNavigate();
 
   const handleSignout = () => {
-    signOut(auth).then(() => {
-      dispatchAuth({type: "LOGOUT"});
-      navigate('/login');
-      console.log("Signed out");
-    }).catch((error) => {
-      console.log(error);
-    });
-  }
+    signOut(auth)
+      .then(() => {
+        dispatchAuth({ type: "LOGOUT" });
+        navigate("/login");
+        console.log("Signed out");
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
 
   return (
     <div className="sidebar">
@@ -59,31 +61,43 @@ const Sidebar = () => {
               <span>Users</span>
             </li>
           </Link>
-          <li>
-            <CategoryIcon className="icon" />
-            <span>Products</span>
-          </li>
-          <li>
-            <DeliveryDiningIcon className="icon" />
-            <span>Delivery</span>
-          </li>
-          <li>
-            <QueryStatsRoundedIcon className="icon" />
-            <span>Stats</span>
-          </li>
-          <li>
-            <PrecisionManufacturingRoundedIcon className="icon" />
-            <span>Logs</span>
-          </li>
+          <Link to="*" style={{ textDecoration: "none" }}>
+            <li>
+              <CategoryIcon className="icon" />
+              <span>Products</span>
+            </li>
+          </Link>
+          <Link to="*" style={{ textDecoration: "none" }}>
+            <li>
+              <DeliveryDiningIcon className="icon" />
+              <span>Delivery</span>
+            </li>
+          </Link>
+          <Link to="*" style={{ textDecoration: "none" }}>
+            <li>
+              <QueryStatsRoundedIcon className="icon" />
+              <span>Stats</span>
+            </li>
+          </Link>
+          <Link to="*" style={{ textDecoration: "none" }}>
+            <li>
+              <PrecisionManufacturingRoundedIcon className="icon" />
+              <span>Logs</span>
+            </li>
+          </Link>
           <p>USER</p>
-          <li>
-            <NotificationImportantRoundedIcon className="icon" />
-            <span>Notification</span>
-          </li>
-          <li>
-            <SettingsRoundedIcon className="icon" />
-            <span>Settings</span>
-          </li>
+          <Link to="*" style={{ textDecoration: "none" }}>
+            <li>
+              <NotificationImportantRoundedIcon className="icon" />
+              <span>Notification</span>
+            </li>
+          </Link>
+          <Link to="*" style={{ textDecoration: "none" }}>
+            <li>
+              <SettingsRoundedIcon className="icon" />
+              <span>Settings</span>
+            </li>
+          </Link>
           <Link to="/profile" style={{ textDecoration: "none" }}>
             <li>
               <AccountCircleRoundedIcon className="icon" />

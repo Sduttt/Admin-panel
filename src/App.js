@@ -10,6 +10,7 @@ import List from "./pages/List/List";
 import Login from "./pages/Login/Login";
 import New from "./pages/New/New";
 import Single from "./pages/Single/Single";
+import Error from "./pages/Error/Error";
 
 import "./Styles/dark.scss";
 
@@ -65,6 +66,7 @@ function App() {
               }
             />
           </Route>
+          <Route path='*' element={<Error />} />
         </Routes>
       </BrowserRouter>
     </div>

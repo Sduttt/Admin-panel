@@ -1,0 +1,33 @@
+.error{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    flex-direction: column;
+
+    .erroricon{
+        font-size: 100px;
+        color: #ff7c01;
+    }
+    .errortxt{
+        font-size: 30px;
+        margin-top: 20px;
+        font-weight: 600;
+        color: #572af7;
+    }
+    .home{
+        font-size: 30px;
+        font-weight: 600;
+        margin-top: 10px;
+
+        .homelink{
+            margin-left: 6px;
+            color: white;
+            font-weight: 700;
+            background: #572af7;
+            border-radius: 20px;
+            padding: 5px 12px;
+            font-size: 25px;
+        }
+    }
+}
