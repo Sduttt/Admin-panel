@@ -20,7 +20,9 @@ function App() {
   const { darkmode } = useContext(darkModeContext);
   const { currentUser } = useContext(AuthContext);
 
-  const myUid = currentUser.uid;
+  let myUid;
+  currentUser == null ? myUid = "" : myUid = currentUser.uid;
+
   const [userData, setUserData] = useState(null)
 
   useEffect(() => {
@@ -38,7 +40,7 @@ function App() {
   const RequireAuth = ({ children }) => {
     return currentUser ? children : <Navigate to="/login" />;
   };
-  // console.log(currentUser)
+
   return (
     <div className={darkmode ? "app dark" : "app"}>
       <BrowserRouter>
