@@ -1,6 +1,8 @@
 # Admin Panel Project
 This project is an admin panel built using React. It uses several third-party libraries, such as Material UI, Firebase, Recharts, and more. The package.json file contains all the necessary dependencies to run the project.
 
+![cover](./src/Assets/cover.png)
+
 ## Installation
 To install the project, first, make sure you have Node.js and npm installed. Then, clone the repository and navigate to the project directory in the terminal. Run the following command to install the dependencies:
 
@@ -23,6 +25,11 @@ To build the project for production, run the following command:
 npm run build
 ```
 This will create a build folder with all the necessary files for deployment.
+
+
+> **Test user:** Email: `testing@test.com`;  Password: `123456` 
+
+
 
 ## Dependencies
 The project uses the following dependencies:
